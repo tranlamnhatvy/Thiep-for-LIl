@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yêu thương gửi các dịu ơ - 20/10</title>
+
+<style>
+:root {
+  --pink: #e889a5;
+  --deep: #a84466;
+  --cream: #fff8f5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  color: white;
+  background: #fce9ed;
+}
+
+button { font: inherit; cursor: pointer; }
+
+.cover {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    linear-gradient(#4d243d66, #3b203c99),
+    url("nhom.jpg") center/cover;
+  transition: opacity .9s, visibility .9s;
+}
+
+.cover.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.envelope {
+  width: min(440px, 100%);
+  padding: 38px 25px;
+  text-align: center;
+  border: 1px solid #ffffff99;
+  border-radius: 24px;
+  background: #fff8f0ed;
+  color: var(--deep);
+  box-shadow: 0 15px 60px #0003;
+  animation: float 3s ease-in-out infinite;
+}
+
+.envelope .flower { font-size: 48px; }
+
+h1, h2, p { margin-top: 10px; }
+
+.open-btn, .next-btn {
+  border: 0;
+  padding: 13px 24px;
+  border-radius: 30px;
+  color: white;
+  background: linear-gradient(135deg, #e889a5, #b34c77);
+  box-shadow: 0 5px 16px #b34c7733;
+}
+
+.open-btn { margin-top: 18px; }
+
+.hero {
+  min-height: 100vh;
+  position: relative;
+  padding: 55px 18px 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background:
+    linear-gradient(hsla(334, 25%, 49%, 0.366), #9f6d84f7),
+    url("nhom.jpg") center/cover fixed;
+}
+
+.content {
+  width: min(760px, 100%);
+  text-align: center;
+}
+
+.eyebrow {
+  letter-spacing: 4px;
+  font-size: 12px;
+  color: #ffe0e9;
+}
+
+.main-title {
+  font-family: Georgia, serif;
+  font-size: clamp(42px, 9vw, 76px);
+  line-height: 1.1;
+  color: #fff0d7;
+  text-shadow: 0 3px 18px #0005;
+  margin: 18px 0;
+}
+
+.subtitle { line-height: 1.8; }
+
+.glass {
+  margin: 28px auto;
+  padding: 26px;
+  max-width: 570px;
+  border: 1px solid #ffffff70;
+  border-radius: 24px;
+  background: #fff9f2ed;
+  color: #754356;
+  box-shadow: 0 12px 45px #0002;
+  backdrop-filter: blur(10px);
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.message {
+  font-family: Georgia, serif;
+  font-size: 19px;
+  line-height: 1.85;
+  white-space: pre-line;
+}
+
+.person-name {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  color: #b94f75;
+}
+
+.counter { font-size: 13px; color: #986d7d; }
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.music-btn {
+  position: fixed;
+  right: 16px;
+  top: 16px;
+  z-index: 5;
+  border: 1px solid #ffffff88;
+  background: #fff8f0e8;
+  color: #a84466;
+  padding: 10px 15px;
+  border-radius: 30px;
+}
+
+.footer { color: #ffe3eb; font-size: 13px; }
+
+.sparkle {
+  position: fixed;
+  top: -20px;
+  z-index: 2;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+
+@keyframes float {
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+@media(max-width: 600px) {
+  .hero { background-attachment: scroll; }
+  .glass { padding: 19px; }
+  .message { font-size: 17px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MÀN HÌNH MỞ THƯ -->
+<div class="cover" id="cover">
+  <div class="envelope">
+    <div class="flower">💌🌷</div>
+    <h1>Gửi các chị em xinh đẹp của Dzyy!</h1>
+    <p>20/10 này, một chút yêu thương muốn gửi đến dợ...</p>
+    <p>Hãy mở lá thư nhé! ✨</p>
+    <button class="open-btn" onclick="openLetter()">
+      Mở thiệp 💗
+    </button>
+  </div>
+</div>
+
+<!-- NHẠC NỀN -->
+<audio id="piano" loop preload="auto">
+  <source src="c:\Users\Vy Nhat\OneDrive\Desktop\20.10\paulyudin-romantic-piano-164822.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn"
+        onclick="toggleMusic()" hidden>
+  🎹 Nhạc: Bật
+</button>
+
+<main class="hero" id="letter" hidden>
+  <div class="content">
+    <div class="eyebrow">A LITTLE LOVE, A LOT OF HAPPINESS</div>
+
+    <h1 class="main-title">
+      Happy<br>20 · 10
+    </h1>
+
+    <p class="subtitle">
+      Chúc mừng Ngày Phụ nữ Việt Nam<br>
+      Gửi ngàn yêu thương đến những người phụ nữ xinh đẹp đã xuất hiện trong hành trình của Dzy 🌷
+    </p>
+
+    <section class="glass">
+      <!-- ẢNH TẬP THỂ -->
+      <img class="photo" src="c:\Users\Vy Nhat\OneDrive\Desktop\20.10\anh.jpg"
+           alt="Ảnh tập thể bạn bè và đồng nghiệp"
+           onerror="this.style.display='none'">
+
+      <div style="font-size:32px">💌💐</div>
+      <h2>Những lời dành riêng cho từng bé nhé</h2>
+
+      <div class="person-name" id="personName"></div>
+      <p class="counter" id="counter"></p>
+      <div class="message" id="message"></div>
+
+      <div class="controls">
+      </div>
+    </section>
+
+    <p class="footer">
+      Made with love by Dzy ♡ Chúc các người đẹp 20/10 thật rực rỡ!
+    </p>
+  </div>
+</main>
+
+<script>
+// ======================================
+// 1. THAY TÊN VÀ LỜI CHÚC TẠI ĐÂY
+// ======================================
+
+const people = [
+  {
+    name: "Mama LIL",
+    message: `Chúc ngày 20/10 thật nhiều điều hạnh phúc 🌷!
+Mỗi ngày luôn xinh đẹp, mỗi ngày nhiều niềm vui.
+Hạnh phúc bên gia đình to ở nhà và gia đình nhỏ còn có 2 đứa con gái ruột thừa.✨ 
+Cảm ơn má là người trainer có tâm, cầm tay chỉ việc cho con nhỏ khờ này, nhiều khi nó hay báo 🌸
+Nhưng mà đừng có chỉ xong rồi âm thầm đi nhe, đợi con đi chung nữa hí hí. 🌷💗
+Hong biết má thích đọc thư không nhưng mà con viết đại đại, nhiều khi có nhiều chuyện nói miệng mắc cỡ
+nên viết ra đọc cho nó nỗi da gà chơi. =))
+Hãy luôn cười thật tươi nhé! Hiện tại thấy cuộc sống má cũng là ước mơ của nhiều người rùi nên không biết 
+chúc thêm gì, thôi chúc những điều hạnh phúc má đang có nó trường tồn và phát triển nhiều nhiều thêm nữa. 🌷`
+  },
+];
+
+// ======================================
+// 2. HIỂN THỊ LỜI CHÚC
+// ======================================
+
+let current = 0;
+
+function renderPerson() {
+  const p = people[current];
+
+  document.getElementById("personName").textContent = p.name;
+  document.getElementById("message").textContent = p.message;
+  document.getElementById("counter").textContent =
+    `Lời chúc ${current + 1} / ${people.length}`;
+}
+
+function changePerson(step) {
+  current = (current + step + people.length) % people.length;
+  renderPerson();
+}
+
+renderPerson();
+
+// ======================================
+// 3. MỞ THƯ VÀ PHÁT NHẠC PIANO
+// ======================================
+
+async function openLetter() {
+  document.getElementById("cover").classList.add("hidden");
+  document.getElementById("musicBtn").hidden = false;
+
+  const piano = document.getElementById("piano");
+
+  try {
+    await piano.play();
+    document.getElementById("musicBtn").textContent = "🎹 Nhạc: Bật";
+  } catch (error) {
+    document.getElementById("musicBtn").textContent =
+      "🎹 Chạm để bật nhạc";
+  }
+
+  createSparkles();
+}
+
+async function toggleMusic() {
+  const piano = document.getElementById("piano");
+  const btn = document.getElementById("musicBtn");
+
+  if (piano.paused) {
+    try {
+      await piano.play();
+      btn.textContent = "🎹 Nhạc: Bật";
+    } catch (error) {
+      btn.textContent = "🎹 Không phát được nhạc";
+    }
+  } else {
+    piano.pause();
+    btn.textContent = "🔇 Nhạc: Tắt";
+  }
+}
+
+// ======================================
+// 4. HIỆU ỨNG CÁNH HOA RƠI
+// ======================================
+
+function createSparkles() {
+  const symbols = ["🌸", "✨", "💗", "🌷"];
+
+  setInterval(() => {
+    const el = document.createElement("span");
+    el.className = "sparkle";
+    el.textContent = symbols[
+      Math.floor(Math.random() * symbols.length)
+    ];
+
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (14 + Math.random() * 16) + "px";
+    el.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 11000);
+  }, 600);
+}
+</script>
+
+</body>
+</html>
